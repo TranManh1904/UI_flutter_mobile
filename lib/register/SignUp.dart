@@ -45,121 +45,7 @@ class _SignUpState extends State<SignUp> {
                   height: 20,
                 ),
                 //TextFormField Email, password
-                Container(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Email address',
-                            style: TextStyle(
-                                fontSize: 13, color: Colors.grey.shade700)),
-                        const SizedBox(
-                          height: 3,
-                        ),
-                        TextFormField(
-                          controller: _emailController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Email không được để trống";
-                            } else if (!RegExp(
-                                    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                .hasMatch(value)) {
-                              return "Email không đúng định dạng";
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade700),
-                                  borderRadius: BorderRadius.circular(10)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade700),
-                                  borderRadius: BorderRadius.circular(10))),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Password',
-                                style: TextStyle(
-                                    fontSize: 13, color: Colors.grey.shade700)),
-                            //hide
-                            InkWell(
-                              highlightColor: Colors.transparent,
-                              splashColor: Colors.transparent,
-                              onTap: () {
-                                setState(() {
-                                  _isHide = !_isHide;
-                                });
-                              },
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    _isHide
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                    color: Colors.grey.shade800,
-                                    size: 25,
-                                  ),
-                                  const SizedBox(
-                                    width: 3,
-                                  ),
-                                  Text(_isHide ? 'Show' : 'Hide',
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.grey.shade700))
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 3,
-                        ),
-                        TextFormField(
-                          obscureText: _isHide,
-                          controller: _passwordController,
-                          validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Vui lòng nhập mật khẩu';
-                            } else if (value.length < 6) {
-                              return 'Mật khẩu phải có ít nhất 6 ký tự';
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade700),
-                                  borderRadius: BorderRadius.circular(10)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.grey.shade700),
-                                  borderRadius: BorderRadius.circular(10))),
-                        ),
-                        const SizedBox(
-                          height: 3,
-                        ),
-                        Text(
-                            'Use 8 or more characters with a mix of letters, numbers & symbols',
-                            style: TextStyle(
-                                fontSize: 11, color: Colors.grey.shade700)),
-                      ],
-                    ),
-                  ),
-                ),
-
+                _FormSignUp(),
                 const SizedBox(height: 30),
                 Row(
                   children: [
@@ -353,5 +239,112 @@ class _SignUpState extends State<SignUp> {
       //call api
       print('sign up');
     } else {}
+  }
+
+  Widget _FormSignUp() {
+    return Container(
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Email address',
+                style: TextStyle(fontSize: 13, color: Colors.grey.shade700)),
+            const SizedBox(
+              height: 3,
+            ),
+            TextFormField(
+              controller: _emailController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Email không được để trống";
+                } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                    .hasMatch(value)) {
+                  return "Email không đúng định dạng";
+                } else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade700),
+                      borderRadius: BorderRadius.circular(10)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade700),
+                      borderRadius: BorderRadius.circular(10))),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Password',
+                    style:
+                        TextStyle(fontSize: 13, color: Colors.grey.shade700)),
+                //hide
+                InkWell(
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  onTap: () {
+                    setState(() {
+                      _isHide = !_isHide;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        _isHide ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.grey.shade800,
+                        size: 25,
+                      ),
+                      const SizedBox(
+                        width: 3,
+                      ),
+                      Text(_isHide ? 'Show' : 'Hide',
+                          style: TextStyle(
+                              fontSize: 13, color: Colors.grey.shade700))
+                    ],
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 3,
+            ),
+            TextFormField(
+              obscureText: _isHide,
+              controller: _passwordController,
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Vui lòng nhập mật khẩu';
+                } else if (value.length < 6) {
+                  return 'Mật khẩu phải có ít nhất 6 ký tự';
+                } else {
+                  return null;
+                }
+              },
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade700),
+                      borderRadius: BorderRadius.circular(10)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade700),
+                      borderRadius: BorderRadius.circular(10))),
+            ),
+            const SizedBox(
+              height: 3,
+            ),
+            Text(
+                'Use 8 or more characters with a mix of letters, numbers & symbols',
+                style: TextStyle(fontSize: 11, color: Colors.grey.shade700)),
+          ],
+        ),
+      ),
+    );
   }
 }
